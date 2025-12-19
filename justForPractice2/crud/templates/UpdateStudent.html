@@ -1,0 +1,15 @@
+{% extends 'Home.html' %}
+
+{% block content %}
+<div class="container d-flex">
+    <div class="col-md-4 ">
+        <h4 class="alert alert-info text-center">Update Student Details</h4>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input class="alert alert-primary" type="submit" value="Update">
+                <a class="alert alert-warning" href="{% url 'studentRegistration' %}">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}
