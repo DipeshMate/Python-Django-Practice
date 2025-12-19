@@ -1,0 +1,48 @@
+django-admin startproject userapp
+(django-admin / python manage.py) startapp userauth
+python manage.py make migration
+
+
+url dispatching or url pattern
+
+
+context are the variable that you send to the templates, 
+here context is a python dictionary that you send in a def function in return rendering of a template.
+
+template inheritance -> create blocks in base index.html
+
+make migration for models
+
+*****post method in Form Group: 
+as post request is coming it has to store in DB 
+
+step1: create a models, run a "make migrations" after Register to admin.py of project 
+and add className of apps.py of project to INSTALLED APPS in Main Project SETTINGS , then migrate
+
+step2: add logic of post request in views
+
+##### errors 1: i find like: "No migrations to apply" when run migrate after makemigrations
+
+python manage.py migrate --fake APPNAME zero
+This will make your migration to fake. Now you can run the migrate script
+
+python manage.py migrate APPNAME
+Tables will be created and you solved your problem.. Cheers!!!
+
+2: modulenotfound error you must add , in installed apps
+
+**** python manage.py shell :- you can use Django's models 
+like 
+you view all objects:- Contact(modelName).objects.all()[0].name - you will get queryset
+
+searching in query set
+Contact(modelName).objects.filter(name='name',phone='')
+
+to edit query in shell
+
+instance = Contact.objects.filter(name='name',phone='55555')[0]
+instance.phone = '66666'
+instance.save()
+
+
+optimistic rendering vs pessimistic rendering

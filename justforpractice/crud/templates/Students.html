@@ -1,0 +1,53 @@
+{% extends 'Home.html' %}
+
+{% block content %}
+<p>Session Getting...</p>
+<h4>{{name}}</h4>
+<div class="container d-flex flex-row gap-2">
+    <div class="col-md-4 ">
+        <h4 class="alert alert-info text-center">Add New Student</h4>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+           <div class="d-flex gap-3">
+               <input class="btn btn-success" type="submit" value="Add User">
+               <a class="btn btn-warning text-decoration-none" href="{% url 'Home' %}">Back to Home</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8 ">
+        <h4 class="alert alert-info text-center">Students Details</h4>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Student id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for st in stud %}
+              <tr>
+                <th scope="row">{{st.id}}</th>
+                <td>{{st.name}}</td>
+                <td>{{st.email}}</td>
+                <td>{{st.password}}</td>
+                <td class="d-flex gap-2">
+                    <form action="{% url 'UpdateStudent' st.id %}" method="GET">
+                        {% csrf_token %}
+                        <input class="btn btn-info" type="submit" value="Edit">
+                    </form>
+                    <form action="{% url 'deleteStudentData' st.id %}" method="POST">
+                        {% csrf_token %}
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+{% endblock content %}
