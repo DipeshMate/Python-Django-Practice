@@ -1,0 +1,14 @@
+{% extends 'signup.html' %}
+{% block title %} UpdatePost Page{% endblock title %}
+{% block content %}
+    <div class="col-sm-10">
+        <h3>Profile/ Update Post</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input class="btn btn-info" type="submit" value="Update Post">
+            <a class="btn btn-danger" href="{% url 'profile' %}">Cancel</a> 
+
+        </form>
+    </div>
+{% endblock content %}

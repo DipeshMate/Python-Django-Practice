@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title %} Login Page {% endblock title %}</title>
+</head>
+<body>
+    {% block content %}
+    <form action="" method="POST" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %} 
+        {% for error in form.non_field_errors %} 
+          {{error}} 
+        {% endfor %} 
+        {% endif %}
+    
+        {% for fm in form %} <p class="{{fm.as_tag}}" >{{fm.label_tag}} {{fm}} {{fm.errors|striptags}}</p> {% endfor form %} 
+        <input type="submit" value="Sign in">
+        <a href="{% url 'signup' %}">SignUp</a>  
+    
+        {% for message in messages %} 
+        <div class="display">
+            <p {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}} </p> 
+        </div>
+        {% endfor %}
+    </form>
+    {% endblock content %}
+</body>
+</html>

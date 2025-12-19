@@ -1,0 +1,15 @@
+{% extends 'login.html' %}
+{% block title %} SignUp Page{% endblock title%}
+{% block content %}
+<form action="" method="POST" novalidate>
+    {% csrf_token %}
+    
+    {% for fm in form %} <p class="{{fm.as_tag}}" >{{fm.label_tag}} {{fm}} {{fm.errors|striptags}}</p> {% endfor form %} 
+    <input type="submit" value="Sign up">
+    {% for message in messages %} 
+    <div class="display">
+        <p {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}} </p> 
+    </div>
+    {% endfor %}
+</form>
+{% endblock content %}

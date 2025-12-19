@@ -1,0 +1,71 @@
+{% extends 'signup.html' %}
+{% block title %} Profile Page{% endblock title %}
+
+{% block content %}
+{% include 'Navbar.html' %}
+<h2>User Profile</h2>
+<h3>Welcome "{{name}}"</h3>
+
+    {% block msg %}
+        {% if messages %} 
+                {% for message in messages %} 
+                <div class="display">
+                    <p {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}} </p>
+                    <button type="button" class="close" data-dismiss ="alert" aria-label="Close" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+        {% endif %}
+    {% endblock msg %}
+
+    {% block leftside %}
+        <div class="col-sm-2">
+            <h4 class="my-3">{{name}}</h4>
+            <h5>{{fullname}}</h5>
+            {% for group in groups %} <p>{{group.name}}</p> {% endfor %}
+            <h6 class="mt-3">Your IP: {{ip}}</h6>
+            <button type="button" class="btn btn-danger">Login Times <span class="badge badge-light">{{ct}}</span></button>
+        </div>
+    {% endblock leftside %}
+
+
+    {% block rightside %}
+        {% if form %}
+            <table class="table">
+                <a class=" text-center btn btn-info" href="{% url 'addpost' %}">Add Post</a>
+                <thead>
+                <tr>
+                    <th scope="col" style="width: 2%">id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col"style="width: 15%">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for fm in form %} 
+                <tr>
+                    <th scope="row">{{fm.id}}</th>
+                    <td>{{fm.title}}</td>
+                    <td>{{fm.desc}}</td>
+                    <td class="d-flex g-4 p-3 m-2 text-center">
+                        <a class="btn btn-warning px-3 mx-2" href="{% url 'updatepost' fm.id %}">Edit</a> 
+                        
+                        {% if perms.autho.delete_post %}
+                            <form action="{% url 'deletepost' fm.id %}" method="post">
+                                {% csrf_token %}
+                                <input class="btn btn-danger" type="submit" value="Delete"/>  
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor form %}
+                </tbody>
+            </table>
+        {% else %}
+            <h4 class="text-center alert alert-warning">No Records</h4>
+        {% endif %}
+    {% endblock rightside %}
+
+
+{% endblock content %}

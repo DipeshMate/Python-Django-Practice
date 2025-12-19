@@ -1,0 +1,26 @@
+{% extends 'signup.html' %}
+
+{% block title %} Home Page{% endblock title %}
+{% block content %}
+{% block navbar %}
+{% include 'Navbar.html' %}
+{% endblock%}
+   <div class="col-sm-10">
+    <h3 class="text-success my-5">Home Page</h3>
+
+    {% if request.user.is_authenticated %}
+    {% for post in form %}
+    <div class="jumbotron jumbotron-fluid jumbo-color">
+        <div class="container">
+            <h1 class="display-4 font-weight-bold">{{post.title}}</h1>
+            <p class="lead" >{{post.desc}}</p>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+     <p>No Records:</p>
+    <a class="btn btn-info" href="{% url 'login' %}">Login</a>  
+    {% endif %}
+
+   </div>
+{% endblock content %} 

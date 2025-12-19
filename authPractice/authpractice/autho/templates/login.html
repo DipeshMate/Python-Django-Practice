@@ -1,0 +1,28 @@
+{% extends 'signup.html' %}
+
+{% block title %} Login Page {% endblock title %}
+
+{% block content %}
+{% include 'Navbar.html' %}
+
+<h3 class="text-info my-5">Login to Track your Work</h3>
+{% for message in messages %} 
+<div class="display">
+    <p {% if message.tags %} class="alert alert-{{message.tags}} mb-3" {% endif %}>{{message}} </p> 
+</div>
+{% endfor %}
+
+<form action="" method="POST" novalidate>
+    {% csrf_token %}
+
+    {% for fm in form %} <p class="{{fm.as_tag}}" >{{fm.label_tag}} {{fm}} <small class="text text-danger my-3"> {{fm.errors|striptags}} </small> </p> {% endfor form %} 
+    <input class="btn btn-info" type="submit" value="Login">
+    <a class="btn btn-primary" href="{% url 'signup' %}">SignUp</a>  
+    
+    {% if form.non_field_errors %} 
+      {% for error in form.non_field_errors %} 
+        {{error}} 
+      {% endfor %} 
+    {% endif %}
+</form>
+{% endblock content %}
