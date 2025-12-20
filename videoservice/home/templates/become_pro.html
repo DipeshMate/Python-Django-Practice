@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block start %}
+ 
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <h3>Why Become pro</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At veritatis sed, magni velit maxime sequi voluptas qui aspernatur eius. Molestias, illum aliquam nam vel labore facilis veniam atque doloribus. Tenetur.
+            </p>
+
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Membership type</label>
+                    <select class="form-control" name="membership">
+                        <option>Choose</option>
+                        <option value="MONTHLY">MONTHLY - 599 ₹/- </option>
+                        <option value="YEARLY">YEARLY - 7199 ₹/- </option>
+
+                    </select>
+                </div>
+                <div class="text-center">
+               <button class="btn btn-primary mt-3 ">Become Pro</button>
+            </div>
+            </form>
+        </div>
+<div class="col-lg-6">
+    <img src="https://oroinc.com/b2b-ecommerce/wp-content/uploads/sites/3/2021/03/Payment-Gateway-in-eCommerce.png" class="img-responsive">
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
